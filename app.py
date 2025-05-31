@@ -1,8 +1,16 @@
-﻿import streamlit as st
-import openai
+﻿
+import streamlit as st
+from openai import OpenAI
 
-# Get OpenAI API key from Streamlit secrets
-client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+# Securely load OpenAI API key from Streamlit Secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+# The rest of your code follows...
+import streamlit as st
+from openai import OpenAI
+
+# Securely load OpenAI API key from Streamlit Secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Set a daily calorie goal
 CALORIE_GOAL = 1800
