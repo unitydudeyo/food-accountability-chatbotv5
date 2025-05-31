@@ -1,15 +1,7 @@
-﻿
-import streamlit as st
+﻿import streamlit as st
 from openai import OpenAI
 
-# Securely load OpenAI API key from Streamlit Secrets
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
-# The rest of your code follows...
-import streamlit as st
-from openai import OpenAI
-
-# Securely load OpenAI API key from Streamlit Secrets
+# Set up OpenAI client using Streamlit secrets
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Set a daily calorie goal
@@ -29,7 +21,7 @@ meal = st.text_input("What did you eat?")
 # Log meal and estimate calories
 if st.button("Log Meal"):
     if meal:
-        prompt = f"Estimate the total calories for the following meal: {meal}. Just give me the number, no extra text."
+        prompt = f"Estimate the total calories for the following meal: {meal}. Just give me the number only, no extra text."
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[
