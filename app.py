@@ -1,19 +1,19 @@
 ﻿import streamlit as st
 import openai
 
-# Replace with your OpenAI API key
-client = openai.OpenAI(api_key="sk-abc123...")  # Replace with your actual OpenAI API key
+# Get OpenAI API key from Streamlit secrets
+client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-# Set calorie goal
+# Set a daily calorie goal
 CALORIE_GOAL = 1800
 
-# Initialize session state
+# Initialise session state
 if 'meals' not in st.session_state:
     st.session_state.meals = []
     st.session_state.total_calories = 0
 
 # App title
-st.title("📝 Food Accountability Chatbot (GPT-Estimated Calories)")
+st.title("📝 Food Accountability Chatbot (GPT-Powered)")
 
 # Input for meal
 meal = st.text_input("What did you eat?")
@@ -45,7 +45,7 @@ if st.session_state.meals:
         st.write(f"{i}. {entry['meal']} - {entry['calories']} kcal")
     st.write(f"**Total calories:** {st.session_state.total_calories} kcal")
 
-    # GPT feedback
+    # GPT feedback button
     if st.button("Get Feedback"):
         meal_list = ", ".join([f"{e['meal']} ({e['calories']} kcal)" for e in st.session_state.meals])
         prompt = f"The user has eaten: {meal_list}. Total: {st.session_state.total_calories} kcal. Their goal is {CALORIE_GOAL} kcal for fat loss. Give them feedback."
